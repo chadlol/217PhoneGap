@@ -16,6 +16,23 @@
 
     <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/cordova.js"></script>
+    <script type="text/javascript">
+        function addContact(){
+            var dc = navigator.contacts.create();
+            dc.displayName = "Daves Pizza";
+            var name = new ContactName();
+            name.givenName = "Dave";
+            name.familyName = "Pizza";
+            dc.name = name;
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('work', '212-555-1234', false);
+            dc.phoneNumbers = phoneNumbers;
+            // save
+            dc.save();
+        }
+    </script>
+
 </head>
 
 <body>
@@ -23,8 +40,8 @@
 <div data-role="page" id="home">
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
-        <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-
+        <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a>
+        <a class="ui-btn-right" href ="" onclick="addContact();"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a class="ui-btn-active ui-state-persist" href="#home">Home</a></li>
@@ -97,7 +114,7 @@
             <span class="description">Just a plain salad with croutons, onions, a deviled egg. Available dressings are Ranch and Thousand Island.</span>
         </div>
 
-        <div data-product="6432" class="product">
+        <div data-product="6487" class="product">
             <span data-name="Fruit Bowl"><h5>Fruit Bowl</h5></span>
             <span data-price="5.99"><small>$5.99</small></span><br>
             <span class="description">Plain fruit bowl, nothing special. Contains strawberries, blue berries pineapple, and grapes.</span>
