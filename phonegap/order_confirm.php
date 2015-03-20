@@ -9,7 +9,7 @@
 $name = $_POST['name'];
 $address = $_POST['address'];
 
-$to = "217cis@gmail.com";
+$to = "217cis@gmail.com,chadohl@gmail.com,karen.kelly@scc.spokane.edu";
 $subject = "Order";
 $txt = "Someone's made an order from Hot Mess!\nName: $name\nAddress: $address";
 
