@@ -18,104 +18,23 @@
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/cordova-2.7.0.js"></script>
     <script>
-        function addContact(){
-            var dc = navigator.contacts.create();
-            dc.displayName = "Daves Pizza";
-            var name = new ContactName();
-            name.givenName = "Dave";
-            name.familyName = "Pizza";
-            dc.name = name;
-            var phoneNumbers = [];
-            phoneNumbers[0] = new ContactField('work', '212-555-1234', false);
-            dc.phoneNumbers = phoneNumbers;
-            // save
-            dc.save();
-        }
-        var deviceReadyDeferred = $.Deferred();
-        var jqmReadyDeferred = $.Deferred();
-        document.addEventListener("deviceReady", deviceReady, false);
-        function deviceReady() {
-            deviceReadyDeferred.resolve();
-        }
-        $(document).one("mobileinit", function () {
-            jqmReadyDeferred.resolve();
-        });
-        $.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
-        function doWhenBothFrameworksLoaded() {
-            var    pictureSource=navigator.camera.PictureSourceType;
-            var    destinationType=navigator.camera.DestinationType;
-            // Called when a photo is successfully retrieved
-            //
-            function onPhotoDataSuccess(imageData) {
-                // Get image handle
-                //
-                var smallImage = document.getElementById('smallImage');
-                // Unhide image elements
-                //
-                smallImage.style.display = 'block';
-                // Show the captured photo
-                // The inline CSS rules are used to resize the image
-                //
-                smallImage.src = "data:image/jpeg;base64," + imageData;
+            window.onload = function(){
+                document.addEventListener("deviceready". onDeviceReady, false);
             }
-            // Called when a photo is successfully retrieved
-            //
-            function onPhotoFileSuccess(imageData) {
-                // Get image handle
-                console.log(JSON.stringify(imageData));
-                // Get image handle
-                //
-                var smallImage = document.getElementById('smallImage');
-                // Unhide image elements
-                //
-                smallImage.style.display = 'block';
-                // Show the captured photo
-                // The inline CSS rules are used to resize the image
-                //
-                smallImage.src = imageData;
+
+            function onDeviceReady(){
+                document.getElementById('btnSave').addEventListener('click', saveContact, false);
+
+                function saveContact(){
+                    var fullName = "Hot Mess Pizza";
+                    var phone = "509-123-1234";
+
+                    var theContact = navigator.contacts.create({"displayName" : fullName});
+                    theContact.phoneNumbers[0] = phone;
+
+                    theContact.save();
+                }
             }
-            // Called when a photo is successfully retrieved
-            //
-            function onPhotoURISuccess(imageURI) {
-                // Uncomment to view the image file URI
-                // console.log(imageURI);
-                // asdfGet image handle
-                //
-                var largeImage = document.getElementById('largeImage');
-                // Unhide image elements
-                //
-                largeImage.style.display = 'block';
-                // Show the captured photo
-                // The inline CSS rules are used to resize the image
-                //
-                largeImage.src = imageURI;
-            }
-            // A button will call this function
-            //
-            function capturePhotoWithData() {
-                // Take picture using device camera and retrieve image as base64-encoded string
-                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-            }
-            $("#capture").on("click", function() {
-                navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
-            });
-            // A button will call this function
-            //
-            function getPhoto(source) {
-                // Retrieve image file location from specified source
-                navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-                    destinationType: destinationType.FILE_URI,
-                    sourceType: source });
-            }
-            // Called if something bad happens.
-            //
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-            $("#captureWithData").on("click", function(){
-                capturePhotoWithData();
-            })
-        }
     </script>
 
 </head>
@@ -126,7 +45,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a>
-        <button class="ui-btn-right" onclick="addContact();"><img src="images/contact.png" alt="Add as contact"></button><br>
+        <a class="ui-btn-right" id="btnSave" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a class="ui-btn-active ui-state-persist" href="#home">Home</a></li>
@@ -152,7 +71,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-        <button class="ui-btn-right" onclick="addContact();"><img src="images/contact.png" alt="Add as contact"></button><br>
+
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -235,7 +154,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-        <button class="ui-btn-right" onclick="addContact();"><img src="images/contact.png" alt="Add as contact"></button><br>
+
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -273,7 +192,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-        <button class="ui-btn-right" onclick="addContact();"><img src="images/contact.png" alt="Add as contact"></button><br>
+
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
