@@ -9,11 +9,8 @@
 $form = <<<EOD
 
 <form method='post' action='order_confirm.php?'>
-
-    Name<br/>
-    <input type='text' name='name' placeholder='Name' required/><br/>
-    Address<br/>
-    <input type='address' name='address' placeholder='Address' required/><br/>
+    Name: <input type='text' name='name' placeholder='Name' required/><br/>
+    Address: <input type='address' name='address' placeholder='Address' required/><br/>
     <input type='submit' name='submit' value='Submit Order' id='submitOrder'>
 </form>
 EOD;
