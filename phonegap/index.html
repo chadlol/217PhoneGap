@@ -26,15 +26,12 @@
                 document.getElementById('btnSave').addEventListener('click', saveContact, false);
 
                 function saveContact(){
-                    var fullName = "Hot Mess Pizza";
-                    var phoneNumbers = [];
-                    phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
+                    var myContact = navigator.contacts.create({"displayName":"Hot Mess Pizza","name":{"phoneNumbers":[{"type":"other","value":"5091231234","id":0,"pref":false}],"emails":[{"type":"home","value":"hot.mess@hotmess.com","id":0,"pref":false}]}});
+                    myContact.save();
+                    console.log("The contact, " + myContact.name.givenName + ", has been created");
 
-                    var theContact = navigator.contacts.create({"displayName" : fullName});
-                    theContact.phoneNumbers = phoneNumbers;
-
-                    theContact.save();
                 }
+
             }
     </script>
 
