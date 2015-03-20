@@ -20,13 +20,13 @@
     <script type="text/javascript">
         function addContact(){
             var dc = navigator.contacts.create();
-            dc.displayName = "Daves Pizza";
+            dc.displayName = "Hot Mess Pizza";
             var name = new ContactName();
-            name.givenName = "Dave";
+            name.givenName = "HotMess";
             name.familyName = "Pizza";
             dc.name = name;
             var phoneNumbers = [];
-            phoneNumbers[0] = new ContactField('work', '212-555-1234', false);
+            phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
             dc.phoneNumbers = phoneNumbers;
             // save
             dc.save();
