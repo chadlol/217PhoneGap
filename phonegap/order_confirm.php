@@ -17,5 +17,5 @@ $headers = "From: Hot.Mess@hotmess.com";
 
 mail($to,$subject,$txt,$headers);
 
-header("Location: http://217-11.chadohl.com/index.php");
+header("Location: http://217-11.chadohl.com/index.html");
 die();
