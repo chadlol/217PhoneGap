@@ -27,10 +27,11 @@
 
                 function saveContact(){
                     var fullName = "Hot Mess Pizza";
-                    var phone = "509-123-1234";
+                    var phoneNumbers = [];
+                    phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
 
                     var theContact = navigator.contacts.create({"displayName" : fullName});
-                    theContact.phoneNumbers[0] = phone;
+                    theContact.phoneNumbers = phoneNumbers;
 
                     theContact.save();
                 }
