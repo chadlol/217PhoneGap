@@ -23,13 +23,13 @@
             dc.displayName = "Hot Mess Pizza";
             var name = new ContactName();
             name.givenName = "Hot Mess Pizza";
-            name.familyName = "Hot Mess Pizza";
             dc.name = name;
             var phoneNumbers = [];
             phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
             dc.phoneNumbers = phoneNumbers;
             // save
             dc.save();
+            alert('Added ' + dc.displayName + 'to contacts.');
         }
 
         var deviceReadyDeferred = $.Deferred();
@@ -82,7 +82,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-
+        <a class="ui-btn-right" onclick="addContact();" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -165,7 +165,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-
+        <a class="ui-btn-right" onclick="addContact();" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -203,7 +203,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a><br>
-
+        <a class="ui-btn-right" onclick="addContact();" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a href="#home">Home</a></li>
