@@ -17,51 +17,22 @@
     <!-- Include the jQuery Mobile library -->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script>
-            window.onload = function(){
-                document.addEventListener("deviceready". onDeviceReady, false);
-            }
+        function addContact() {
 
-            function onDeviceReady(){
-                document.getElementById('btnSave').addEventListener('click', saveContact, false);
+            var dc = navigator.contacts.create();
+            dc.displayName = "Hot Mess Pizza";
+            var name = new ContactName();
+            name.givenName = "Hot Mess Pizza";
+            name.familyName = "Hot Mess Pizza";
+            dc.name = name;
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
+            dc.phoneNumbers = phoneNumbers;
+            // save
+            dc.save();
+        }
 
-                function saveContact(){
-//                    var contact = navigator.contacts.create();
-//                    contact.displayName = "Hot Mess Pizza";
-//                    contact.nickname = "Hot Mess Pizza";       //specify both to support all devices
-//                    var name = new ContactName();
-//                    name.givenName = "Hot Mess";
-//                    name.familyName = "Hot Mess";
-//                    contact.name = name;
-//
-//                    // save
-//                    contact.save(onSaveSuccess,onSaveError);
 
-                    var dc = navigator.contacts.create();
-                    dc.displayName = "Hot Mess Pizza";
-                    var name = new ContactName();
-                    name.givenName = "Hot Mess Pizza";
-                    name.familyName = "Hot Mess Pizza";
-                    dc.name = name;
-                    var phoneNumbers = [];
-                    phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
-                    dc.phoneNumbers = phoneNumbers;
-                    // save
-                    dc.save();
-                }
-
-            }
-
-            // onSaveSuccess: Get a snapshot of the current contacts
-            //
-            function onSaveSuccess(contact) {
-                alert("Save Success");
-            }
-
-            // onSaveError: Failed to get the contacts
-            //
-            function onSaveError(contactError) {
-                alert("Error = " + contactError.code);
-            }
     </script>
 
 </head>
@@ -72,7 +43,8 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a>
-        <a class="ui-btn-right" id="btnSave" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
+        <button class="ui-btn-right" onclick="addContact();" href="#"><img src="images/contact.png" alt="Add as contact"></button><br>
+
         <div data-role="navbar">
             <ul>
                 <li><a class="ui-btn-active ui-state-persist" href="#home">Home</a></li>
@@ -86,6 +58,7 @@
 
     <div data-role="content">
         <h2>Welcome to Hot Mess pizza!</h2>
+
         <p>Click on <a href="#menu">Menu</a> to get your order started!</p>
     </div>
 
@@ -126,7 +99,7 @@
         </div>
 
         <div data-product="1510" class="product">
-           <span data-name="Euro Style"><h5>Euro Style</h5></span>
+            <span data-name="Euro Style"><h5>Euro Style</h5></span>
             <span data-price="14.99"><small>$14.99</small></span><br>
             <span class="description">This is our take on the european style ham and pineapple. Savory and sweet all in one bite! Something unique and fun to try!</span>
         </div>
@@ -154,7 +127,8 @@
         <h2>Drinks</h2>
 
         <div>
-            <small>1.99</small><br>
+            <small>1.99</small>
+            <br>
             Cola, Lemonade, Root Beer, or Bottled Water
         </div>
     </div>
@@ -257,7 +231,7 @@
             var subtotal = qty * price;
             grandTotal += subtotal;
 
-            cartDiv.append('<hr><br/><div>'+ name + "<br/>" + '<small> $' + price.toFixed(2) + ' - ' + qty + '<br/>Subtotal: $' + subtotal.toFixed(2) + '</small></div>')
+            cartDiv.append('<hr><br/><div>' + name + "<br/>" + '<small> $' + price.toFixed(2) + ' - ' + qty + '<br/>Subtotal: $' + subtotal.toFixed(2) + '</small></div>')
         }
         cartDiv.append('<hr><p>Grand Total: $' + grandTotal.toFixed(2) + '</p>');
         $('#buy').parent().show();
@@ -298,22 +272,22 @@
 
         })
 
-        $('#saveOrder').on('click', function(event){
+        $('#saveOrder').on('click', function (event) {
             var cartStr = "[";
-            for(var item in cart){
+            for (var item in cart) {
                 cartStr += JSON.stringify(cart[item]) + ",";
             }
-            cartStr = cartStr.slice(0,-1);
+            cartStr = cartStr.slice(0, -1);
             cartStr += "]";
             console.log(cartStr);
             localStorage['cart'] = cartStr;
         })
 
-        $('#loadOrder').on('click', function(event){
+        $('#loadOrder').on('click', function (event) {
             cart = [];
             var obj = JSON.parse(localStorage['cart']);
-            for( var item in obj){
-                pid = obj[item].pid ;
+            for (var item in obj) {
+                pid = obj[item].pid;
                 cart[pid] = obj[item];
             }
             displayCart()
