@@ -18,51 +18,34 @@
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
     <script>
-            window.onload = function(){
-                document.addEventListener("deviceready". onDeviceReady, false);
-            }
+        function addContact(){
+            var dc = navigator.contacts.create();
+            dc.displayName = "Hot Mess Pizza";
+            var name = new ContactName();
+            name.givenName = "Hot Mess Pizza";
+            name.familyName = "Hot Mess Pizza";
+            dc.name = name;
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
+            dc.phoneNumbers = phoneNumbers;
+            // save
+            dc.save();
+        }
 
-            function onDeviceReady(){
-                document.getElementById('btnSave').addEventListener('click', saveContact, false);
+        var deviceReadyDeferred = $.Deferred();
+        var jqmReadyDeferred = $.Deferred();
+        document.addEventListener("deviceReady", deviceReady, false);
+        function deviceReady() {
+            deviceReadyDeferred.resolve();
+        }
+        $(document).one("mobileinit", function () {
+            jqmReadyDeferred.resolve();
+        });
+        $.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
 
-                function addContact(){
-//                    var contact = navigator.contacts.create();
-//                    contact.displayName = "Hot Mess Pizza";
-//                    contact.nickname = "Hot Mess Pizza";       //specify both to support all devices
-//                    var name = new ContactName();
-//                    name.givenName = "Hot Mess";
-//                    name.familyName = "Hot Mess";
-//                    contact.name = name;
-//
-//                    // save
-//                    contact.save(onSaveSuccess,onSaveError);
-
-                    var dc = navigator.contacts.create();
-                    dc.displayName = "Hot Mess Pizza";
-                    var name = new ContactName();
-                    name.givenName = "Hot Mess Pizza";
-                    name.familyName = "Hot Mess Pizza";
-                    dc.name = name;
-                    var phoneNumbers = [];
-                    phoneNumbers[0] = new ContactField('work', '509-123-1234', false);
-                    dc.phoneNumbers = phoneNumbers;
-                    // save
-                    dc.save();
-                }
-
-            }
-
-            // onSaveSuccess: Get a snapshot of the current contacts
-            //
-            function onSaveSuccess(contact) {
-                alert("Save Success");
-            }
-
-            // onSaveError: Failed to get the contacts
-            //
-            function onSaveError(contactError) {
-                alert("Error = " + contactError.code);
-            }
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
     </script>
 
 </head>
@@ -73,7 +56,7 @@
     <div data-role="header">
         <h1>Hot Mess Pizza</h1>
         <a class="ui-btn-left" href="tel:509-123-1234"><img src="images/call.png" alt="Call Us"></a>
-        <a class="ui-btn-right" id="btnSave" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
+        <a class="ui-btn-right" onclick="addContact();" href="#"><img src="images/contact.png" alt="Add as contact"></a><br>
         <div data-role="navbar">
             <ul>
                 <li><a class="ui-btn-active ui-state-persist" href="#home">Home</a></li>
