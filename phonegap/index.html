@@ -26,12 +26,30 @@
                 document.getElementById('btnSave').addEventListener('click', saveContact, false);
 
                 function saveContact(){
-                    var myContact = navigator.contacts.create({"displayName":"Hot Mess Pizza","name":{"phoneNumbers":[{"type":"other","value":"5091231234","id":0,"pref":false}],"emails":[{"type":"home","value":"hot.mess@hotmess.com","id":0,"pref":false}]}});
-                    myContact.save();
-                    console.log("The contact, " + myContact.name.givenName + ", has been created");
+                    var contact = navigator.contacts.create();
+                    contact.displayName = "Plumber";
+                    contact.nickname = "Plumber";       //specify both to support all devices
+                    var name = new ContactName();
+                    name.givenName = "Jane";
+                    name.familyName = "Doe";
+                    contact.name = name;
 
+                    // save
+                    contact.save(onSaveSuccess,onSaveError);
                 }
 
+            }
+
+            // onSaveSuccess: Get a snapshot of the current contacts
+            //
+            function onSaveSuccess(contact) {
+                alert("Save Success");
+            }
+
+            // onSaveError: Failed to get the contacts
+            //
+            function onSaveError(contactError) {
+                alert("Error = " + contactError.code);
             }
     </script>
 
